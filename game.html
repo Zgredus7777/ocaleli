@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ocaleli - Postapokaliptyczna Walka o Przetrwanie</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Panel boczny -->
+        <div class="sidebar">
+            <div class="logo">
+                <h1>Ocaleli</h1>
+                <p>Walka o przetrwanie</p>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="#" class="active" data-section="shelter"><i class="fas fa-home"></i> Schron</a></li>
+                <li><a href="#" data-section="buildings"><i class="fas fa-hard-hat"></i> Rozbudowa</a></li>
+                <li><a href="#" data-section="production"><i class="fas fa-tools"></i> Produkcja</a></li>
+                <li><a href="#" data-section="research"><i class="fas fa-flask"></i> Badania</a></li>
+                <li><a href="#" data-section="map"><i class="fas fa-map"></i> Mapa</a></li>
+                <li><a href="#" data-section="alliance"><i class="fas fa-users"></i> Sojusze</a></li>
+                <li><a href="#" data-section="messages"><i class="fas fa-envelope"></i> Wiadomości</a></li>
+                <li><a href="#" data-section="shop"><i class="fas fa-shopping-cart"></i> Sklep</a></li>
+                <li><a href="#" data-section="settings"><i class="fas fa-cog"></i> Ustawienia</a></li>
+            </ul>
+            
+            <div class="sidebar-footer">
+                <div class="player-info">
+                    <div class="player-avatar">
+                        <i class="fas fa-user-secret"></i>
+                    </div>
+                    <div>
+                        <div class="player-name" id="playerName">Komandor Stahl</div>
+                        <div class="player-rank">Ranga: <span id="playerRank">Strażnik Ruin</span></div>
+                    </div>
+                </div>
+                
+                <button class="btn logout-btn">
+                    <i class="fas fa-door-open"></i> Wyloguj
+                </button>
+            </div>
+        </div>
+        
+        <!-- Główna zawartość -->
+        <div class="main-content">
+            <!-- Nagłówek -->
+            <div class="header">
+                <div class="resources">
+                    <div class="resource food">
+                        <i class="fas fa-apple-alt"></i>
+                        <span id="foodCount">0</span>
+                    </div>
+                    <div class="resource water">
+                        <i class="fas fa-tint"></i>
+                        <span id="waterCount">0</span>
+                    </div>
+                    <div class="resource energy">
+                        <i class="fas fa-bolt"></i>
+                        <span id="energyCount">0</span>
+                    </div>
+                    <div class="resource scrap">
+                        <i class="fas fa-cog"></i>
+                        <span id="scrapCount">0</span>
+                    </div>
+                    <div class="resource tech">
+                        <i class="fas fa-microchip"></i>
+                        <span id="techCount">0</span>
+                    </div>
+                    <div class="resource gold">
+                        <i class="fas fa-coins"></i>
+                        <span id="goldCount">0</span>
+                    </div>
+                </div>
+                
+                <div class="time-info">
+                    <div id="currentTime">--:--:--</div>
+                    <div id="gameDate">1 dzień po Apokalipsie</div>
+                </div>
+            </div>
+            
+            <!-- Sekcje gry -->
+            <div id="gameSections">
+                <!-- Sekcja schronu (domyślna) -->
+                <div class="game-section active" id="shelterSection">
+                    <div id="shelterContent" class="dashboard"></div>
+                </div>
+                
+                <!-- Sekcja rozbudowy -->
+                <div class="game-section" id="buildingsSection">
+                    <div id="buildingsContent" class="dashboard"></div>
+                </div>
+                
+                <!-- Sekcja produkcji -->
+                <div class="game-section" id="productionSection">
+                    <div id="productionContent" class="dashboard"></div>
+                </div>
+                
+                <!-- Sekcja badań -->
+                <div class="game-section" id="researchSection">
+                    <div id="researchContent" class="dashboard"></div>
+                </div>
+                
+                <!-- Sekcja mapy -->
+                <div class="game-section" id="mapSection">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Mapa Postapokaliptycznego Świata</h2>
+                            <div class="map-actions">
+                                <button class="btn map-btn active" data-map-type="satellite">
+                                    <i class="fas fa-satellite"></i> Satelita
+                                </button>
+                                <button class="btn map-btn" data-map-type="terrain">
+                                    <i class="fas fa-mountain"></i> Teren
+                                </button>
+                                <button class="btn map-btn" data-map-type="resources">
+                                    <i class="fas fa-apple-alt"></i> Zasoby
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="world-map" id="worldMap">
+                                <!-- Mapa zostanie wygenerowana przez JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="map-controls">
+                        <div class="map-zoom">
+                            <button class="btn map-zoom-btn" id="zoomIn">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                            <button class="btn map-zoom-btn" id="zoomOut">
+                                <i class="fas fa-search-minus"></i>
+                            </button>
+                        </div>
+                        <div class="map-center">
+                            <button class="btn map-center-btn" id="centerMap">
+                                <i class="fas fa-crosshairs"></i> Centruj
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sekcja sojuszy -->
+                <div class="game-section" id="allianceSection">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Sojusze</h2>
+                        </div>
+                        <div class="card-content">
+                            <div class="empty-section">
+                                <i class="fas fa-users"></i>
+                                <h3>Nie jesteś członkiem żadnego sojuszu</h3>
+                                <p>Dołącz do istniejącego sojuszu lub stwórz własny, aby współpracować z innymi graczami.</p>
+                                <button class="btn register-btn" style="margin-top: 20px;">Stwórz Sojusz</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sekcja wiadomości -->
+                <div class="game-section" id="messagesSection">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Wiadomości</h2>
+                        </div>
+                        <div class="card-content">
+                            <div class="empty-section">
+                                <i class="fas fa-envelope"></i>
+                                <h3>Brak wiadomości</h3>
+                                <p>Tutaj pojawią się wiadomości od innych graczy i systemu.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sekcja ustawień -->
+                <div class="game-section" id="settingsSection">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Ustawienia</h2>
+                        </div>
+                        <div class="card-content">
+                            <div class="empty-section">
+                                <i class="fas fa-cog"></i>
+                                <h3>Ustawienia gry</h3>
+                                <p>Tutaj możesz zmienić ustawienia gry i konta.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sekcja sklepu -->
+                <div class="game-section" id="shopSection">
+                    <div class="dashboard">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="card-title">Sklep Wędrownych Handlarzy</h2>
+                                <div class="shop-balance">
+                                    <i class="fas fa-coins"></i> Kapitał handlowy: <span id="tradeBalance">0</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <div class="shop-tabs">
+                                    <button class="shop-tab-btn active" data-tab="resources">Zasoby</button>
+                                    <button class="shop-tab-btn" data-tab="equipment">Wyposażenie</button>
+                                    <button class="shop-tab-btn" data-tab="blueprints">Plany</button>
+                                    <button class="shop-tab-btn" data-tab="special">Specjalne</button>
+                                    <button class="shop-tab-btn" data-tab="microtransactions">Mikropłatności</button>
+                                </div>
+                                
+                                <div class="shop-tab-content active" id="resourcesTab">
+                                    <div class="shop-items" id="resourcesItems"></div>
+                                </div>
+                                
+                                <div class="shop-tab-content" id="equipmentTab">
+                                    <div class="shop-items" id="equipmentItems"></div>
+                                </div>
+                                
+                                <div class="shop-tab-content" id="blueprintsTab">
+                                    <div class="shop-items" id="blueprintsItems"></div>
+                                </div>
+                                
+                                <div class="shop-tab-content" id="specialTab">
+                                    <div class="shop-items" id="specialItems"></div>
+                                </div>
+                                
+                                <div class="shop-tab-content" id="microtransactionsTab">
+                                    <div class="shop-items" id="microtransactionsItems">
+                                        <div class="shop-item">
+                                            <div class="shop-item-header">
+                                                <div class="shop-item-icon">
+                                                    <i class="fas fa-coins"></i>
+                                                </div>
+                                                <div>
+                                                    <div class="shop-item-name">Pakiet Złota</div>
+                                                    <div class="shop-item-level">500 Złota</div>
+                                                </div>
+                                            </div>
+                                            <div class="shop-item-price">
+                                                $4.99
+                                            </div>
+                                            <div class="shop-item-description">Natychmiastowy dostęp do 500 jednostek złota</div>
+                                            <button class="buy-btn" data-package="gold_500">Kup</button>
+                                        </div>
+                                        
+                                        <div class="shop-item">
+                                            <div class="shop-item-header">
+                                                <div class="shop-item-icon">
+                                                    <i class="fas fa-gem"></i>
+                                                </div>
+                                                <div>
+                                                    <div class="shop-item-name">Pakiet Premium</div>
+                                                    <div class="shop-item-level">1200 Złota</div>
+                                                </div>
+                                            </div>
+                                            <div class="shop-item-price">
+                                                $9.99
+                                            </div>
+                                            <div class="shop-item-description">1200 złota + ekskluzywny artefakt</div>
+                                            <button class="buy-btn" data-package="premium_1200">Kup</button>
+                                        </div>
+                                        
+                                        <div class="shop-item">
+                                            <div class="shop-item-header">
+                                                <div class="shop-item-icon">
+                                                    <i class="fas fa-crown"></i>
+                                                </div>
+                                                <div>
+                                                    <div class="shop-item-name">Pakiet VIP</div>
+                                                    <div class="shop-item-level">3000 Złota</div>
+                                                </div>
+                                            </div>
+                                            <div class="shop-item-price">
+                                                $19.99
+                                            </div>
+                                            <div class="shop-item-description">3000 złota + unikalny budynek + 30 dni boosta</div>
+                                            <button class="buy-btn" data-package="vip_3000">Kup</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="card-title">Twoje przedmioty</h2>
+                            </div>
+                            <div class="card-content">
+                                <div class="inventory-grid" id="playerInventory"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Stopka -->
+            <div class="footer">
+                <p>Ocaleli: Postapokaliptyczna Walka o Przetrwanie | Wersja 1.0 | © 2023 Wszystkie prawa zastrzeżone</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale i okna dialogowe -->
+    <div class="modal" id="eventModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 id="eventTitle"></h2>
+            <div id="eventDescription"></div>
+            <div class="event-actions" id="eventActions"></div>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="script.js"></script>
+    <script src="map.js"></script>
+</body>
+</html>

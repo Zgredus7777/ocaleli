@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rejestracja - Ocaleli</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-box">
+            <div class="logo">
+                <h1>Ocaleli</h1>
+                <p>Walka o przetrwanie</p>
+            </div>
+            
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="username"><i class="fas fa-user"></i> Nazwa użytkownika</label>
+                    <input type="text" id="registerUsername" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="registerEmail" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password"><i class="fas fa-lock"></i> Hasło</label>
+                    <input type="password" id="registerPassword" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword"><i class="fas fa-lock"></i> Potwierdź hasło</label>
+                    <input type="password" id="registerConfirmPassword" required>
+                </div>
+                
+                <button type="submit" class="btn register-btn">Zarejestruj się</button>
+                
+                <div class="auth-links">
+                    <p>Masz już konto? <a href="login.html">Zaloguj się</a></p>
+                    <p><a href="index.html">Powrót do strony głównej</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="auth.js"></script>
+</body>
+</html>
